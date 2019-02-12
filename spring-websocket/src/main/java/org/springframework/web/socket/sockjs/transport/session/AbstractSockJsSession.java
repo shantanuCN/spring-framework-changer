@@ -16,6 +16,7 @@
 
 package org.springframework.web.socket.sockjs.transport.session;
 
+import org.springframework.web.socket.sockjs.transport.SockJsServiceConfig_1;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,15 +125,15 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 	 * @param attributes attributes from the HTTP handshake to associate with the WebSocket
 	 * session; the provided attributes are copied, the original map is not used.
 	 */
-	public AbstractSockJsSession(String id, SockJsServiceConfig config, WebSocketHandler handler,
+	public AbstractSockJsSession(String id, SockJsServiceConfig_1 config, WebSocketHandler handler,
 			@Nullable Map<String, Object> attributes) {
 
 		Assert.notNull(id, "Session id must not be null");
-		Assert.notNull(config, "SockJsServiceConfig must not be null");
+		Assert.notNull((SockJsServiceConfig) config, "SockJsServiceConfig must not be null");
 		Assert.notNull(handler, "WebSocketHandler must not be null");
 
 		this.id = id;
-		this.config = config;
+		this.config = (SockJsServiceConfig) config;
 		this.handler = handler;
 
 		if (attributes != null) {

@@ -16,8 +16,11 @@
 package org.springframework.http.server;
 
 import java.net.URI;
+import org.springframework.http.server.RequestPath_1;
 
 import org.springframework.lang.Nullable;
+import org.springframework.http.server.RequestPath_2;
+import org.springframework.http.server.RequestPath_3;
 
 /**
  * Represents the complete path for a request.
@@ -25,24 +28,7 @@ import org.springframework.lang.Nullable;
  * @author Rossen Stoyanchev
  * @since 5.0
  */
-public interface RequestPath extends PathContainer {
-
-	/**
-	 * Returns the portion of the URL path that represents the application.
-	 * The context path is always at the beginning of the path and starts but
-	 * does not end with "/". It is shared for URLs of the same application.
-	 * <p>The context path may come from the underlying runtime API such as
-	 * when deploying as a WAR to a Servlet container or it may be assigned in
-	 * a WebFlux application through the use of
-	 * {@link org.springframework.http.server.reactive.ContextPathCompositeHandler
-	 * ContextPathCompositeHandler}.
-	 */
-	PathContainer contextPath();
-
-	/**
-	 * The portion of the request path after the context path.
-	 */
-	PathContainer pathWithinApplication();
+public interface RequestPath extends PathContainer, RequestPath_3, RequestPath_2, RequestPath_1 {
 
 	/**
 	 * Return a new {@code RequestPath} instance with a modified context path.

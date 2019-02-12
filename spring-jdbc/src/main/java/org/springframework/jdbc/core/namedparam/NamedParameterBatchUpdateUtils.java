@@ -16,6 +16,7 @@
 
 package org.springframework.jdbc.core.namedparam;
 
+import org.springframework.jdbc.core.JdbcOperations_1;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -33,7 +34,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 public abstract class NamedParameterBatchUpdateUtils extends BatchUpdateUtils {
 
 	public static int[] executeBatchUpdateWithNamedParameters(final ParsedSql parsedSql,
-			final SqlParameterSource[] batchArgs, JdbcOperations jdbcOperations) {
+			final SqlParameterSource[] batchArgs, JdbcOperations_1 jdbcOperations) {
 
 		if (batchArgs.length <= 0) {
 			return new int[] {0};

@@ -16,7 +16,9 @@
 package org.springframework.web.reactive.socket;
 
 import java.util.Map;
+import org.springframework.web.reactive.socket.WebSocketSession_1;
 import java.util.function.Function;
+import org.springframework.web.reactive.socket.WebSocketSession_2;
 
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
@@ -35,7 +37,7 @@ import org.springframework.core.io.buffer.DataBufferFactory;
  * @author Rossen Stoyanchev
  * @since 5.0
  */
-public interface WebSocketSession {
+public interface WebSocketSession extends WebSocketSession_2, WebSocketSession_1 {
 
 	/**
 	 * Return the id for the session.
@@ -46,12 +48,6 @@ public interface WebSocketSession {
 	 * Return information from the handshake request.
 	 */
 	HandshakeInfo getHandshakeInfo();
-
-	/**
-	 * Return a {@code DataBuffer} Factory to create message payloads.
-	 * @return the buffer factory for the session
-	 */
-	DataBufferFactory bufferFactory();
 
 	/**
 	 * Return the map with attributes associated with the WebSocket session.
@@ -82,18 +78,7 @@ public interface WebSocketSession {
 	 */
 	Mono<Void> send(Publisher<WebSocketMessage> messages);
 
-	/**
-	 * Close the WebSocket session with {@link CloseStatus#NORMAL}.
-	 */
-	default Mono<Void> close() {
-		return close(CloseStatus.NORMAL);
-	}
-
-	/**
-	 * Close the WebSocket session with the given status.
-	 * @param status the close status
-	 */
-	Mono<Void> close(CloseStatus status);
+	
 
 
 	// WebSocketMessage factory methods

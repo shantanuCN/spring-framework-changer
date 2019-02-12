@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.config;
 
+import org.springframework.beans.factory.config.Scope_1;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
@@ -33,10 +34,10 @@ public class BeanExpressionContext {
 	private final Scope scope;
 
 
-	public BeanExpressionContext(ConfigurableBeanFactory beanFactory, @Nullable Scope scope) {
+	public BeanExpressionContext(ConfigurableBeanFactory beanFactory, @Nullable Scope_1 scope) {
 		Assert.notNull(beanFactory, "BeanFactory must not be null");
 		this.beanFactory = beanFactory;
-		this.scope = scope;
+		this.scope = (Scope) scope;
 	}
 
 	public final ConfigurableBeanFactory getBeanFactory() {

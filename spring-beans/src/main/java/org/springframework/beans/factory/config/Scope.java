@@ -17,7 +17,9 @@
 package org.springframework.beans.factory.config;
 
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.config.Scope_1;
 import org.springframework.lang.Nullable;
+import org.springframework.beans.factory.config.Scope_2;
 
 /**
  * Strategy interface used by a {@link ConfigurableBeanFactory},
@@ -57,81 +59,7 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.web.context.request.RequestScope
  * @see org.springframework.web.context.request.SessionScope
  */
-public interface Scope {
-
-	/**
-	 * Return the object with the given name from the underlying scope,
-	 * {@link org.springframework.beans.factory.ObjectFactory#getObject() creating it}
-	 * if not found in the underlying storage mechanism.
-	 * <p>This is the central operation of a Scope, and the only operation
-	 * that is absolutely required.
-	 * @param name the name of the object to retrieve
-	 * @param objectFactory the {@link ObjectFactory} to use to create the scoped
-	 * object if it is not present in the underlying storage mechanism
-	 * @return the desired object (never {@code null})
-	 * @throws IllegalStateException if the underlying scope is not currently active
-	 */
-	Object get(String name, ObjectFactory<?> objectFactory);
-
-	/**
-	 * Remove the object with the given {@code name} from the underlying scope.
-	 * <p>Returns {@code null} if no object was found; otherwise
-	 * returns the removed {@code Object}.
-	 * <p>Note that an implementation should also remove a registered destruction
-	 * callback for the specified object, if any. It does, however, <i>not</i>
-	 * need to <i>execute</i> a registered destruction callback in this case,
-	 * since the object will be destroyed by the caller (if appropriate).
-	 * <p><b>Note: This is an optional operation.</b> Implementations may throw
-	 * {@link UnsupportedOperationException} if they do not support explicitly
-	 * removing an object.
-	 * @param name the name of the object to remove
-	 * @return the removed object, or {@code null} if no object was present
-	 * @throws IllegalStateException if the underlying scope is not currently active
-	 * @see #registerDestructionCallback
-	 */
-	@Nullable
-	Object remove(String name);
-
-	/**
-	 * Register a callback to be executed on destruction of the specified
-	 * object in the scope (or at destruction of the entire scope, if the
-	 * scope does not destroy individual objects but rather only terminates
-	 * in its entirety).
-	 * <p><b>Note: This is an optional operation.</b> This method will only
-	 * be called for scoped beans with actual destruction configuration
-	 * (DisposableBean, destroy-method, DestructionAwareBeanPostProcessor).
-	 * Implementations should do their best to execute a given callback
-	 * at the appropriate time. If such a callback is not supported by the
-	 * underlying runtime environment at all, the callback <i>must be
-	 * ignored and a corresponding warning should be logged</i>.
-	 * <p>Note that 'destruction' refers to automatic destruction of
-	 * the object as part of the scope's own lifecycle, not to the individual
-	 * scoped object having been explicitly removed by the application.
-	 * If a scoped object gets removed via this facade's {@link #remove(String)}
-	 * method, any registered destruction callback should be removed as well,
-	 * assuming that the removed object will be reused or manually destroyed.
-	 * @param name the name of the object to execute the destruction callback for
-	 * @param callback the destruction callback to be executed.
-	 * Note that the passed-in Runnable will never throw an exception,
-	 * so it can safely be executed without an enclosing try-catch block.
-	 * Furthermore, the Runnable will usually be serializable, provided
-	 * that its target object is serializable as well.
-	 * @throws IllegalStateException if the underlying scope is not currently active
-	 * @see org.springframework.beans.factory.DisposableBean
-	 * @see org.springframework.beans.factory.support.AbstractBeanDefinition#getDestroyMethodName()
-	 * @see DestructionAwareBeanPostProcessor
-	 */
-	void registerDestructionCallback(String name, Runnable callback);
-
-	/**
-	 * Resolve the contextual object for the given key, if any.
-	 * E.g. the HttpServletRequest object for key "request".
-	 * @param key the contextual key
-	 * @return the corresponding object, or {@code null} if none found
-	 * @throws IllegalStateException if the underlying scope is not currently active
-	 */
-	@Nullable
-	Object resolveContextualObject(String key);
+public interface Scope extends Scope_2, Scope_1 {
 
 	/**
 	 * Return the <em>conversation ID</em> for the current underlying scope, if any.

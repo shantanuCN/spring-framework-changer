@@ -16,6 +16,7 @@
 
 package org.springframework.aop.scope;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory_5;
 import java.io.Serializable;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -47,10 +48,10 @@ public class DefaultScopedObject implements ScopedObject, Serializable {
 	 * @param beanFactory the {@link ConfigurableBeanFactory} that holds the scoped target object
 	 * @param targetBeanName the name of the target bean
 	 */
-	public DefaultScopedObject(ConfigurableBeanFactory beanFactory, String targetBeanName) {
-		Assert.notNull(beanFactory, "BeanFactory must not be null");
+	public DefaultScopedObject(ConfigurableBeanFactory_5 beanFactory, String targetBeanName) {
+		Assert.notNull((ConfigurableBeanFactory) beanFactory, "BeanFactory must not be null");
 		Assert.hasText(targetBeanName, "'targetBeanName' must not be empty");
-		this.beanFactory = beanFactory;
+		this.beanFactory = (ConfigurableBeanFactory) beanFactory;
 		this.targetBeanName = targetBeanName;
 	}
 

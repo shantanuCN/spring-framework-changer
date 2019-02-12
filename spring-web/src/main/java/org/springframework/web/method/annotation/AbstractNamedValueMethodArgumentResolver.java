@@ -16,6 +16,7 @@
 
 package org.springframework.web.method.annotation;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory_2;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.ServletException;
@@ -83,10 +84,10 @@ public abstract class AbstractNamedValueMethodArgumentResolver implements Handle
 	 * and #{...} SpEL expressions in default values, or {@code null} if default
 	 * values are not expected to contain expressions
 	 */
-	public AbstractNamedValueMethodArgumentResolver(@Nullable ConfigurableBeanFactory beanFactory) {
-		this.configurableBeanFactory = beanFactory;
-		this.expressionContext =
-				(beanFactory != null ? new BeanExpressionContext(beanFactory, new RequestScope()) : null);
+	public AbstractNamedValueMethodArgumentResolver(@Nullable ConfigurableBeanFactory_2 beanFactory) {
+		this.configurableBeanFactory = (ConfigurableBeanFactory) beanFactory;
+		this.expressionContext = (beanFactory != null
+                ? new BeanExpressionContext((ConfigurableBeanFactory) beanFactory, new RequestScope()) : null);
 	}
 
 

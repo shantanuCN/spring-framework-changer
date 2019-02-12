@@ -17,7 +17,9 @@
 package org.springframework.ui;
 
 import java.util.Collection;
+import org.springframework.ui.Model_1;
 import java.util.Map;
+import org.springframework.ui.Model_2;
 
 import org.springframework.lang.Nullable;
 
@@ -29,38 +31,7 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 2.5.1
  */
-public interface Model {
-
-	/**
-	 * Add the supplied attribute under the supplied name.
-	 * @param attributeName the name of the model attribute (never {@code null})
-	 * @param attributeValue the model attribute value (can be {@code null})
-	 */
-	Model addAttribute(String attributeName, @Nullable Object attributeValue);
-
-	/**
-	 * Add the supplied attribute to this {@code Map} using a
-	 * {@link org.springframework.core.Conventions#getVariableName generated name}.
-	 * <p><i>Note: Empty {@link java.util.Collection Collections} are not added to
-	 * the model when using this method because we cannot correctly determine
-	 * the true convention name. View code should check for {@code null} rather
-	 * than for empty collections as is already done by JSTL tags.</i>
-	 * @param attributeValue the model attribute value (never {@code null})
-	 */
-	Model addAttribute(Object attributeValue);
-
-	/**
-	 * Copy all attributes in the supplied {@code Collection} into this
-	 * {@code Map}, using attribute name generation for each element.
-	 * @see #addAttribute(Object)
-	 */
-	Model addAllAttributes(Collection<?> attributeValues);
-
-	/**
-	 * Copy all attributes in the supplied {@code Map} into this {@code Map}.
-	 * @see #addAttribute(String, Object)
-	 */
-	Model addAllAttributes(Map<String, ?> attributes);
+public interface Model extends Model_2, Model_1 {
 
 	/**
 	 * Copy all attributes in the supplied {@code Map} into this {@code Map},
@@ -75,10 +46,5 @@ public interface Model {
 	 * @return whether this model contains a corresponding attribute
 	 */
 	boolean containsAttribute(String attributeName);
-
-	/**
-	 * Return the current set of model attributes as a Map.
-	 */
-	Map<String, Object> asMap();
 
 }

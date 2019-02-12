@@ -16,6 +16,7 @@
 
 package org.springframework.context.annotation;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry_1;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -81,7 +82,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * @param registry the {@code BeanFactory} to load bean definitions into, in the form
 	 * of a {@code BeanDefinitionRegistry}
 	 */
-	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry) {
+	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry_1 registry) {
 		this(registry, true);
 	}
 
@@ -109,8 +110,8 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * @see #setResourceLoader
 	 * @see #setEnvironment
 	 */
-	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {
-		this(registry, useDefaultFilters, getOrCreateEnvironment(registry));
+	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry_1 registry, boolean useDefaultFilters) {
+		this(registry, useDefaultFilters, getOrCreateEnvironment((BeanDefinitionRegistry) registry));
 	}
 
 	/**
@@ -134,7 +135,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * @since 3.1
 	 * @see #setResourceLoader
 	 */
-	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters,
+	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry_1 registry, boolean useDefaultFilters,
 			Environment environment) {
 
 		this(registry, useDefaultFilters, environment,
@@ -156,12 +157,11 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * @param resourceLoader the {@link ResourceLoader} to use
 	 * @since 4.3.6
 	 */
-	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters,
+	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry_1 registry, boolean useDefaultFilters,
 			Environment environment, @Nullable ResourceLoader resourceLoader) {
 
-		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
-		this.registry = registry;
-
+		Assert.notNull((BeanDefinitionRegistry) registry, "BeanDefinitionRegistry must not be null");
+				this.registry = (BeanDefinitionRegistry) registry;
 		if (useDefaultFilters) {
 			registerDefaultFilters();
 		}
@@ -315,8 +315,8 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * @param definitionHolder the bean definition plus bean name for the bean
 	 * @param registry the BeanDefinitionRegistry to register the bean with
 	 */
-	protected void registerBeanDefinition(BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry) {
-		BeanDefinitionReaderUtils.registerBeanDefinition(definitionHolder, registry);
+	protected void registerBeanDefinition(BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry_1 registry) {
+		BeanDefinitionReaderUtils.registerBeanDefinition(definitionHolder, (BeanDefinitionRegistry) registry);
 	}
 
 
@@ -370,8 +370,8 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * Get the Environment from the given registry if possible, otherwise return a new
 	 * StandardEnvironment.
 	 */
-	private static Environment getOrCreateEnvironment(BeanDefinitionRegistry registry) {
-		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
+	private static Environment getOrCreateEnvironment(BeanDefinitionRegistry_1 registry) {
+		Assert.notNull((BeanDefinitionRegistry) registry, "BeanDefinitionRegistry must not be null");
 		if (registry instanceof EnvironmentCapable) {
 			return ((EnvironmentCapable) registry).getEnvironment();
 		}

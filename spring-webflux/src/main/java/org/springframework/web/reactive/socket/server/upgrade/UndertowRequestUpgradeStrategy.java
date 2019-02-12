@@ -16,6 +16,7 @@
 
 package org.springframework.web.reactive.socket.server.upgrade;
 
+import org.springframework.web.reactive.socket.WebSocketHandler_1;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -86,9 +87,9 @@ public class UndertowRequestUpgradeStrategy implements RequestUpgradeStrategy {
 
 		private final DataBufferFactory bufferFactory;
 
-		public DefaultCallback(HandshakeInfo handshakeInfo, WebSocketHandler handler, DataBufferFactory bufferFactory) {
+		public DefaultCallback(HandshakeInfo handshakeInfo, WebSocketHandler_1 handler, DataBufferFactory bufferFactory) {
 			this.handshakeInfo = handshakeInfo;
-			this.handler = handler;
+			this.handler = (WebSocketHandler) handler;
 			this.bufferFactory = bufferFactory;
 		}
 

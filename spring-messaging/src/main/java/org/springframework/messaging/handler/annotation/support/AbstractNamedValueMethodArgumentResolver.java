@@ -16,6 +16,7 @@
 
 package org.springframework.messaging.handler.annotation.support;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory_2;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -77,11 +78,12 @@ public abstract class AbstractNamedValueMethodArgumentResolver implements Handle
 	 * values are not expected to contain expressions
 	 */
 	protected AbstractNamedValueMethodArgumentResolver(ConversionService cs,
-			@Nullable ConfigurableBeanFactory beanFactory) {
+			@Nullable ConfigurableBeanFactory_2 beanFactory) {
 
 		this.conversionService = (cs != null ? cs : DefaultConversionService.getSharedInstance());
-		this.configurableBeanFactory = beanFactory;
-		this.expressionContext = (beanFactory != null ? new BeanExpressionContext(beanFactory, null) : null);
+		this.configurableBeanFactory = (ConfigurableBeanFactory) beanFactory;
+		this.expressionContext = (beanFactory != null
+                ? new BeanExpressionContext((ConfigurableBeanFactory) beanFactory, null) : null);
 	}
 
 

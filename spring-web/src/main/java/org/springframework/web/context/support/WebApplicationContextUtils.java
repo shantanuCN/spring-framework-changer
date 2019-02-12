@@ -16,6 +16,7 @@
 
 package org.springframework.web.context.support;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory_2;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -169,8 +170,8 @@ public abstract class WebApplicationContextUtils {
 	 * with the given BeanFactory, as used by the WebApplicationContext.
 	 * @param beanFactory the BeanFactory to configure
 	 */
-	public static void registerWebApplicationScopes(ConfigurableListableBeanFactory beanFactory) {
-		registerWebApplicationScopes(beanFactory, null);
+	public static void registerWebApplicationScopes(ConfigurableListableBeanFactory_2 beanFactory) {
+		registerWebApplicationScopes((ConfigurableListableBeanFactory) beanFactory, null);
 	}
 
 	/**
@@ -179,7 +180,7 @@ public abstract class WebApplicationContextUtils {
 	 * @param beanFactory the BeanFactory to configure
 	 * @param sc the ServletContext that we're running within
 	 */
-	public static void registerWebApplicationScopes(ConfigurableListableBeanFactory beanFactory,
+	public static void registerWebApplicationScopes(ConfigurableListableBeanFactory_2 beanFactory,
 			@Nullable ServletContext sc) {
 
 		beanFactory.registerScope(WebApplicationContext.SCOPE_REQUEST, new RequestScope());
@@ -196,7 +197,7 @@ public abstract class WebApplicationContextUtils {
 		beanFactory.registerResolvableDependency(HttpSession.class, new SessionObjectFactory());
 		beanFactory.registerResolvableDependency(WebRequest.class, new WebRequestObjectFactory());
 		if (jsfPresent) {
-			FacesDependencyRegistrar.registerFacesDependencies(beanFactory);
+			FacesDependencyRegistrar.registerFacesDependencies((ConfigurableListableBeanFactory) beanFactory);
 		}
 	}
 
@@ -206,8 +207,8 @@ public abstract class WebApplicationContextUtils {
 	 * @param bf the BeanFactory to configure
 	 * @param sc the ServletContext that we're running within
 	 */
-	public static void registerEnvironmentBeans(ConfigurableListableBeanFactory bf, @Nullable ServletContext sc) {
-		registerEnvironmentBeans(bf, sc, null);
+	public static void registerEnvironmentBeans(ConfigurableListableBeanFactory_2 bf, @Nullable ServletContext sc) {
+		registerEnvironmentBeans((ConfigurableListableBeanFactory) bf, sc, null);
 	}
 
 	/**
@@ -217,7 +218,7 @@ public abstract class WebApplicationContextUtils {
 	 * @param servletContext the ServletContext that we're running within
 	 * @param servletConfig the ServletConfig
 	 */
-	public static void registerEnvironmentBeans(ConfigurableListableBeanFactory bf,
+	public static void registerEnvironmentBeans(ConfigurableListableBeanFactory_2 bf,
 			@Nullable ServletContext servletContext, @Nullable ServletConfig servletConfig) {
 
 		if (servletContext != null && !bf.containsBean(WebApplicationContext.SERVLET_CONTEXT_BEAN_NAME)) {
@@ -400,7 +401,7 @@ public abstract class WebApplicationContextUtils {
  	 */
 	private static class FacesDependencyRegistrar {
 
-		public static void registerFacesDependencies(ConfigurableListableBeanFactory beanFactory) {
+		public static void registerFacesDependencies(ConfigurableListableBeanFactory_2 beanFactory) {
 			beanFactory.registerResolvableDependency(FacesContext.class, new ObjectFactory<FacesContext>() {
 				@Override
 				public FacesContext getObject() {

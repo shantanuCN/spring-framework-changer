@@ -16,6 +16,8 @@
 
 package org.springframework.context.support;
 
+import org.springframework.context.ConfigurableApplicationContext_1;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory_4;
 import java.lang.management.ManagementFactory;
 import java.util.Collections;
 import java.util.Iterator;
@@ -68,7 +70,7 @@ public class LiveBeansView implements LiveBeansViewMBean, ApplicationContextAwar
 	private static String applicationName;
 
 
-	static void registerApplicationContext(ConfigurableApplicationContext applicationContext) {
+	static void registerApplicationContext(ConfigurableApplicationContext_1 applicationContext) {
 		String mbeanDomain = applicationContext.getEnvironment().getProperty(MBEAN_DOMAIN_PROPERTY_NAME);
 		if (mbeanDomain != null) {
 			synchronized (applicationContexts) {
@@ -83,14 +85,15 @@ public class LiveBeansView implements LiveBeansViewMBean, ApplicationContextAwar
 						throw new ApplicationContextException("Failed to register LiveBeansView MBean", ex);
 					}
 				}
-				applicationContexts.add(applicationContext);
+				applicationContexts.add((ConfigurableApplicationContext) applicationContext);
 			}
 		}
 	}
 
-	static void unregisterApplicationContext(ConfigurableApplicationContext applicationContext) {
+	static void unregisterApplicationContext(ConfigurableApplicationContext_1 applicationContext) {
 		synchronized (applicationContexts) {
-			if (applicationContexts.remove(applicationContext) && applicationContexts.isEmpty()) {
+			if (applicationContexts.remove((ConfigurableApplicationContext) applicationContext)
+					&& applicationContexts.isEmpty()) {
 				try {
 					MBeanServer server = ManagementFactory.getPlatformMBeanServer();
 					String mbeanDomain = applicationContext.getEnvironment().getProperty(MBEAN_DOMAIN_PROPERTY_NAME);
@@ -222,7 +225,7 @@ public class LiveBeansView implements LiveBeansViewMBean, ApplicationContextAwar
 	 * @param bf the containing bean factory
 	 * @return {@code true} if the bean is to be included; {@code false} otherwise
 	 */
-	protected boolean isBeanEligible(String beanName, BeanDefinition bd, ConfigurableBeanFactory bf) {
+	protected boolean isBeanEligible(String beanName, BeanDefinition bd, ConfigurableBeanFactory_4 bf) {
 		return (bd.getRole() != BeanDefinition.ROLE_INFRASTRUCTURE &&
 				(!bd.isLazyInit() || bf.containsSingleton(beanName)));
 	}

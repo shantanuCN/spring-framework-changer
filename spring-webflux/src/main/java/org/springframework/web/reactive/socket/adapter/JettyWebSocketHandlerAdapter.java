@@ -16,6 +16,7 @@
 
 package org.springframework.web.reactive.socket.adapter;
 
+import org.springframework.web.reactive.socket.WebSocketHandler_1;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
@@ -61,12 +62,12 @@ public class JettyWebSocketHandlerAdapter {
 	private JettyWebSocketSession delegateSession;
 
 
-	public JettyWebSocketHandlerAdapter(WebSocketHandler handler,
+	public JettyWebSocketHandlerAdapter(WebSocketHandler_1 handler,
 			Function<Session, JettyWebSocketSession> sessionFactory) {
 
-		Assert.notNull(handler, "WebSocketHandler is required");
+		Assert.notNull((WebSocketHandler) handler, "WebSocketHandler is required");
 		Assert.notNull(sessionFactory, "'sessionFactory' is required");
-		this.delegateHandler = handler;
+		this.delegateHandler = (WebSocketHandler) handler;
 		this.sessionFactory = sessionFactory;
 	}
 

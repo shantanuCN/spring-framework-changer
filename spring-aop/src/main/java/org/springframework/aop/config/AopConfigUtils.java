@@ -16,6 +16,7 @@
 
 package org.springframework.aop.config;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry_1;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,49 +66,49 @@ public abstract class AopConfigUtils {
 
 
 	@Nullable
-	public static BeanDefinition registerAutoProxyCreatorIfNecessary(BeanDefinitionRegistry registry) {
-		return registerAutoProxyCreatorIfNecessary(registry, null);
+	public static BeanDefinition registerAutoProxyCreatorIfNecessary(BeanDefinitionRegistry_1 registry) {
+		return registerAutoProxyCreatorIfNecessary((BeanDefinitionRegistry) registry, null);
 	}
 
 	@Nullable
 	public static BeanDefinition registerAutoProxyCreatorIfNecessary(
-			BeanDefinitionRegistry registry, @Nullable Object source) {
+			BeanDefinitionRegistry_1 registry, @Nullable Object source) {
 
-		return registerOrEscalateApcAsRequired(InfrastructureAdvisorAutoProxyCreator.class, registry, source);
+		return registerOrEscalateApcAsRequired(InfrastructureAdvisorAutoProxyCreator.class, (BeanDefinitionRegistry) registry, source);
 	}
 
 	@Nullable
-	public static BeanDefinition registerAspectJAutoProxyCreatorIfNecessary(BeanDefinitionRegistry registry) {
-		return registerAspectJAutoProxyCreatorIfNecessary(registry, null);
+	public static BeanDefinition registerAspectJAutoProxyCreatorIfNecessary(BeanDefinitionRegistry_1 registry) {
+		return registerAspectJAutoProxyCreatorIfNecessary((BeanDefinitionRegistry) registry, null);
 	}
 
 	@Nullable
 	public static BeanDefinition registerAspectJAutoProxyCreatorIfNecessary(
-			BeanDefinitionRegistry registry, @Nullable Object source) {
+			BeanDefinitionRegistry_1 registry, @Nullable Object source) {
 
-		return registerOrEscalateApcAsRequired(AspectJAwareAdvisorAutoProxyCreator.class, registry, source);
+		return registerOrEscalateApcAsRequired(AspectJAwareAdvisorAutoProxyCreator.class, (BeanDefinitionRegistry) registry, source);
 	}
 
 	@Nullable
-	public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(BeanDefinitionRegistry registry) {
-		return registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry, null);
+	public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(BeanDefinitionRegistry_1 registry) {
+		return registerAspectJAnnotationAutoProxyCreatorIfNecessary((BeanDefinitionRegistry) registry, null);
 	}
 
 	@Nullable
 	public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(
-			BeanDefinitionRegistry registry, @Nullable Object source) {
+			BeanDefinitionRegistry_1 registry, @Nullable Object source) {
 
-		return registerOrEscalateApcAsRequired(AnnotationAwareAspectJAutoProxyCreator.class, registry, source);
+		return registerOrEscalateApcAsRequired(AnnotationAwareAspectJAutoProxyCreator.class, (BeanDefinitionRegistry) registry, source);
 	}
 
-	public static void forceAutoProxyCreatorToUseClassProxying(BeanDefinitionRegistry registry) {
+	public static void forceAutoProxyCreatorToUseClassProxying(BeanDefinitionRegistry_1 registry) {
 		if (registry.containsBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME)) {
 			BeanDefinition definition = registry.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
 			definition.getPropertyValues().add("proxyTargetClass", Boolean.TRUE);
 		}
 	}
 
-	public static void forceAutoProxyCreatorToExposeProxy(BeanDefinitionRegistry registry) {
+	public static void forceAutoProxyCreatorToExposeProxy(BeanDefinitionRegistry_1 registry) {
 		if (registry.containsBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME)) {
 			BeanDefinition definition = registry.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
 			definition.getPropertyValues().add("exposeProxy", Boolean.TRUE);
@@ -116,10 +117,9 @@ public abstract class AopConfigUtils {
 
 	@Nullable
 	private static BeanDefinition registerOrEscalateApcAsRequired(
-			Class<?> cls, BeanDefinitionRegistry registry, @Nullable Object source) {
+			Class<?> cls, BeanDefinitionRegistry_1 registry, @Nullable Object source) {
 
-		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
-
+		Assert.notNull((BeanDefinitionRegistry) registry, "BeanDefinitionRegistry must not be null");
 		if (registry.containsBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME)) {
 			BeanDefinition apcDefinition = registry.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
 			if (!cls.getName().equals(apcDefinition.getBeanClassName())) {

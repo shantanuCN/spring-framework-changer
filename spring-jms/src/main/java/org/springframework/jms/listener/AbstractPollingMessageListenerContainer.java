@@ -16,6 +16,7 @@
 
 package org.springframework.jms.listener;
 
+import org.springframework.transaction.TransactionStatus_1;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -269,7 +270,7 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 	 * @see #doExecuteListener(javax.jms.Session, javax.jms.Message)
 	 */
 	protected boolean doReceiveAndExecute(Object invoker, @Nullable Session session,
-			@Nullable MessageConsumer consumer, @Nullable TransactionStatus status) throws JMSException {
+			@Nullable MessageConsumer consumer, @Nullable TransactionStatus_1 status) throws JMSException {
 
 		Connection conToClose = null;
 		Session sessionToClose = null;
@@ -392,10 +393,10 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 	 * @param status object representing the transaction
 	 * @param ex the thrown listener exception or error
 	 */
-	private void rollbackOnException(PlatformTransactionManager manager, TransactionStatus status, Throwable ex) {
+	private void rollbackOnException(PlatformTransactionManager manager, TransactionStatus_1 status, Throwable ex) {
 		logger.debug("Initiating transaction rollback on listener exception", ex);
 		try {
-			manager.rollback(status);
+			manager.rollback((TransactionStatus) status);
 		}
 		catch (RuntimeException ex2) {
 			logger.error("Listener exception overridden by rollback exception", ex);

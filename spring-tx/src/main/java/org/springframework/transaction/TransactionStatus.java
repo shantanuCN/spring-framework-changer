@@ -17,6 +17,8 @@
 package org.springframework.transaction;
 
 import java.io.Flushable;
+import org.springframework.transaction.TransactionStatus_1;
+import org.springframework.transaction.TransactionStatus_2;
 
 /**
  * Representation of the status of a transaction.
@@ -36,7 +38,7 @@ import java.io.Flushable;
  * @see org.springframework.transaction.support.TransactionCallback#doInTransaction
  * @see org.springframework.transaction.interceptor.TransactionInterceptor#currentTransactionStatus()
  */
-public interface TransactionStatus extends SavepointManager, Flushable {
+public interface TransactionStatus extends SavepointManager, Flushable, TransactionStatus_2, TransactionStatus_1 {
 
 	/**
 	 * Return whether the present transaction is new; otherwise participating
@@ -59,19 +61,6 @@ public interface TransactionStatus extends SavepointManager, Flushable {
 	boolean hasSavepoint();
 
 	/**
-	 * Set the transaction rollback-only. This instructs the transaction manager
-	 * that the only possible outcome of the transaction may be a rollback, as
-	 * alternative to throwing an exception which would in turn trigger a rollback.
-	 * <p>This is mainly intended for transactions managed by
-	 * {@link org.springframework.transaction.support.TransactionTemplate} or
-	 * {@link org.springframework.transaction.interceptor.TransactionInterceptor},
-	 * where the actual commit/rollback decision is made by the container.
-	 * @see org.springframework.transaction.support.TransactionCallback#doInTransaction
-	 * @see org.springframework.transaction.interceptor.TransactionAttribute#rollbackOn
-	 */
-	void setRollbackOnly();
-
-	/**
 	 * Return whether the transaction has been marked as rollback-only
 	 * (either by the application or by the transaction infrastructure).
 	 */
@@ -87,13 +76,5 @@ public interface TransactionStatus extends SavepointManager, Flushable {
 	 */
 	@Override
 	void flush();
-
-	/**
-	 * Return whether this transaction is completed, that is,
-	 * whether it has already been committed or rolled back.
-	 * @see PlatformTransactionManager#commit
-	 * @see PlatformTransactionManager#rollback
-	 */
-	boolean isCompleted();
 
 }

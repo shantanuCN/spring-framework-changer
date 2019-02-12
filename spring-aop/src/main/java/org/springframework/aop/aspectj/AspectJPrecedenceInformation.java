@@ -17,6 +17,8 @@
 package org.springframework.aop.aspectj;
 
 import org.springframework.core.Ordered;
+import org.springframework.aop.aspectj.AspectJPrecedenceInformation_1;
+import org.springframework.aop.aspectj.AspectJPrecedenceInformation_2;
 
 /**
  * Interface to be implemented by types that can supply the information
@@ -26,7 +28,7 @@ import org.springframework.core.Ordered;
  * @since 2.0
  * @see org.springframework.aop.aspectj.autoproxy.AspectJPrecedenceComparator
  */
-public interface AspectJPrecedenceInformation extends Ordered {
+public interface AspectJPrecedenceInformation extends Ordered, AspectJPrecedenceInformation_2, AspectJPrecedenceInformation_1 {
 
 	// Implementation note:
 	// We need the level of indirection this interface provides as otherwise the
@@ -35,24 +37,6 @@ public interface AspectJPrecedenceInformation extends Ordered {
 	// InstantiationModelAwarePointcutAdvisor which needs to delay creating
 	// its advice for aspects with non-singleton instantiation models.
 
-	/**
-	 * Return the name of the aspect (bean) in which the advice was declared.
-	 */
-	String getAspectName();
-
-	/**
-	 * Return the declaration order of the advice member within the aspect.
-	 */
-	int getDeclarationOrder();
-
-	/**
-	 * Return whether this is a before advice.
-	 */
-	boolean isBeforeAdvice();
-
-	/**
-	 * Return whether this is an after advice.
-	 */
-	boolean isAfterAdvice();
+	
 
 }

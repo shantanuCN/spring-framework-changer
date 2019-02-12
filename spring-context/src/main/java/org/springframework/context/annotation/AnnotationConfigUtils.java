@@ -16,6 +16,7 @@
 
 package org.springframework.context.annotation;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry_1;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -133,8 +134,8 @@ public abstract class AnnotationConfigUtils {
 	 * Register all relevant annotation post processors in the given registry.
 	 * @param registry the registry to operate on
 	 */
-	public static void registerAnnotationConfigProcessors(BeanDefinitionRegistry registry) {
-		registerAnnotationConfigProcessors(registry, null);
+	public static void registerAnnotationConfigProcessors(BeanDefinitionRegistry_1 registry) {
+		registerAnnotationConfigProcessors((BeanDefinitionRegistry) registry, null);
 	}
 
 	/**
@@ -146,7 +147,7 @@ public abstract class AnnotationConfigUtils {
 	 * that have actually been registered by this call
 	 */
 	public static Set<BeanDefinitionHolder> registerAnnotationConfigProcessors(
-			BeanDefinitionRegistry registry, @Nullable Object source) {
+			BeanDefinitionRegistry_1 registry, @Nullable Object source) {
 
 		DefaultListableBeanFactory beanFactory = unwrapDefaultListableBeanFactory(registry);
 		if (beanFactory != null) {
@@ -163,20 +164,20 @@ public abstract class AnnotationConfigUtils {
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
 			def.setSource(source);
-			beanDefs.add(registerPostProcessor(registry, def, CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME));
+			beanDefs.add(registerPostProcessor((BeanDefinitionRegistry) registry, def, CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME));
 		}
 
 		if (!registry.containsBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
 			def.setSource(source);
-			beanDefs.add(registerPostProcessor(registry, def, AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME));
+			beanDefs.add(registerPostProcessor((BeanDefinitionRegistry) registry, def, AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME));
 		}
 
 		// Check for JSR-250 support, and if present add the CommonAnnotationBeanPostProcessor.
 		if (jsr250Present && !registry.containsBeanDefinition(COMMON_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(CommonAnnotationBeanPostProcessor.class);
 			def.setSource(source);
-			beanDefs.add(registerPostProcessor(registry, def, COMMON_ANNOTATION_PROCESSOR_BEAN_NAME));
+			beanDefs.add(registerPostProcessor((BeanDefinitionRegistry) registry, def, COMMON_ANNOTATION_PROCESSOR_BEAN_NAME));
 		}
 
 		// Check for JPA support, and if present add the PersistenceAnnotationBeanPostProcessor.
@@ -191,26 +192,26 @@ public abstract class AnnotationConfigUtils {
 						"Cannot load optional framework class: " + PERSISTENCE_ANNOTATION_PROCESSOR_CLASS_NAME, ex);
 			}
 			def.setSource(source);
-			beanDefs.add(registerPostProcessor(registry, def, PERSISTENCE_ANNOTATION_PROCESSOR_BEAN_NAME));
+			beanDefs.add(registerPostProcessor((BeanDefinitionRegistry) registry, def, PERSISTENCE_ANNOTATION_PROCESSOR_BEAN_NAME));
 		}
 
 		if (!registry.containsBeanDefinition(EVENT_LISTENER_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(EventListenerMethodProcessor.class);
 			def.setSource(source);
-			beanDefs.add(registerPostProcessor(registry, def, EVENT_LISTENER_PROCESSOR_BEAN_NAME));
+			beanDefs.add(registerPostProcessor((BeanDefinitionRegistry) registry, def, EVENT_LISTENER_PROCESSOR_BEAN_NAME));
 		}
 
 		if (!registry.containsBeanDefinition(EVENT_LISTENER_FACTORY_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(DefaultEventListenerFactory.class);
 			def.setSource(source);
-			beanDefs.add(registerPostProcessor(registry, def, EVENT_LISTENER_FACTORY_BEAN_NAME));
+			beanDefs.add(registerPostProcessor((BeanDefinitionRegistry) registry, def, EVENT_LISTENER_FACTORY_BEAN_NAME));
 		}
 
 		return beanDefs;
 	}
 
 	private static BeanDefinitionHolder registerPostProcessor(
-			BeanDefinitionRegistry registry, RootBeanDefinition definition, String beanName) {
+			BeanDefinitionRegistry_1 registry, RootBeanDefinition definition, String beanName) {
 
 		definition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
 		registry.registerBeanDefinition(beanName, definition);
@@ -218,7 +219,7 @@ public abstract class AnnotationConfigUtils {
 	}
 
 	@Nullable
-	private static DefaultListableBeanFactory unwrapDefaultListableBeanFactory(BeanDefinitionRegistry registry) {
+	private static DefaultListableBeanFactory unwrapDefaultListableBeanFactory(BeanDefinitionRegistry_1 registry) {
 		if (registry instanceof DefaultListableBeanFactory) {
 			return (DefaultListableBeanFactory) registry;
 		}
@@ -265,14 +266,14 @@ public abstract class AnnotationConfigUtils {
 	}
 
 	static BeanDefinitionHolder applyScopedProxyMode(
-			ScopeMetadata metadata, BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
+			ScopeMetadata metadata, BeanDefinitionHolder definition, BeanDefinitionRegistry_1 registry) {
 
 		ScopedProxyMode scopedProxyMode = metadata.getScopedProxyMode();
 		if (scopedProxyMode.equals(ScopedProxyMode.NO)) {
 			return definition;
 		}
 		boolean proxyTargetClass = scopedProxyMode.equals(ScopedProxyMode.TARGET_CLASS);
-		return ScopedProxyCreator.createScopedProxy(definition, registry, proxyTargetClass);
+		return ScopedProxyCreator.createScopedProxy(definition, (BeanDefinitionRegistry) registry, proxyTargetClass);
 	}
 
 	@Nullable

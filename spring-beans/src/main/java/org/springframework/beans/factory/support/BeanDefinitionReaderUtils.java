@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.support;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry_1;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -81,10 +82,10 @@ public abstract class BeanDefinitionReaderUtils {
 	 * for the given bean definition
 	 * @see #generateBeanName(BeanDefinition, BeanDefinitionRegistry, boolean)
 	 */
-	public static String generateBeanName(BeanDefinition beanDefinition, BeanDefinitionRegistry registry)
+	public static String generateBeanName(BeanDefinition beanDefinition, BeanDefinitionRegistry_1 registry)
 			throws BeanDefinitionStoreException {
 
-		return generateBeanName(beanDefinition, registry, false);
+		return generateBeanName(beanDefinition, (BeanDefinitionRegistry) registry, false);
 	}
 
 	/**
@@ -101,7 +102,7 @@ public abstract class BeanDefinitionReaderUtils {
 	 * for the given bean definition
 	 */
 	public static String generateBeanName(
-			BeanDefinition definition, BeanDefinitionRegistry registry, boolean isInnerBean)
+			BeanDefinition definition, BeanDefinitionRegistry_1 registry, boolean isInnerBean)
 			throws BeanDefinitionStoreException {
 
 		String generatedBeanName = definition.getBeanClassName();
@@ -125,7 +126,7 @@ public abstract class BeanDefinitionReaderUtils {
 		}
 		else {
 			// Top-level bean: use plain class name with unique suffix if necessary.
-			return uniqueBeanName(generatedBeanName, registry);
+			return uniqueBeanName(generatedBeanName, (BeanDefinitionRegistry) registry);
 		}
 		return id;
 	}
@@ -139,7 +140,7 @@ public abstract class BeanDefinitionReaderUtils {
 	 * @return the unique bean name to use
 	 * @since 5.1
 	 */
-	public static String uniqueBeanName(String beanName, BeanDefinitionRegistry registry) {
+	public static String uniqueBeanName(String beanName, BeanDefinitionRegistry_1 registry) {
 		String id = beanName;
 		int counter = -1;
 
@@ -158,7 +159,7 @@ public abstract class BeanDefinitionReaderUtils {
 	 * @throws BeanDefinitionStoreException if registration failed
 	 */
 	public static void registerBeanDefinition(
-			BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry)
+			BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry_1 registry)
 			throws BeanDefinitionStoreException {
 
 		// Register bean definition under primary name.
@@ -184,7 +185,7 @@ public abstract class BeanDefinitionReaderUtils {
 	 * for the given bean definition or the definition cannot be registered
 	 */
 	public static String registerWithGeneratedName(
-			AbstractBeanDefinition definition, BeanDefinitionRegistry registry)
+			AbstractBeanDefinition definition, BeanDefinitionRegistry_1 registry)
 			throws BeanDefinitionStoreException {
 
 		String generatedName = generateBeanName(definition, registry, false);

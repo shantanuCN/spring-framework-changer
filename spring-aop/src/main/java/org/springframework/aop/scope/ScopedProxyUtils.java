@@ -16,6 +16,7 @@
 
 package org.springframework.aop.scope;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry_1;
 import org.springframework.aop.framework.autoproxy.AutoProxyUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -47,7 +48,7 @@ public abstract class ScopedProxyUtils {
 	 * @return the scoped proxy definition
 	 */
 	public static BeanDefinitionHolder createScopedProxy(BeanDefinitionHolder definition,
-			BeanDefinitionRegistry registry, boolean proxyTargetClass) {
+			BeanDefinitionRegistry_1 registry, boolean proxyTargetClass) {
 
 		String originalBeanName = definition.getBeanName();
 		BeanDefinition targetDefinition = definition.getBeanDefinition();

@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.annotation;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory_1;
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -174,7 +175,7 @@ public class RequiredAnnotationBeanPostProcessor extends InstantiationAwareBeanP
 	 * @param beanName the name of the bean to check against
 	 * @return {@code true} to skip the bean; {@code false} to process it
 	 */
-	protected boolean shouldSkip(@Nullable ConfigurableListableBeanFactory beanFactory, String beanName) {
+	protected boolean shouldSkip(@Nullable ConfigurableListableBeanFactory_1 beanFactory, String beanName) {
 		if (beanFactory == null || !beanFactory.containsBeanDefinition(beanName)) {
 			return false;
 		}

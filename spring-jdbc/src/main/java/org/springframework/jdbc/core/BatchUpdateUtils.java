@@ -16,6 +16,7 @@
 
 package org.springframework.jdbc.core;
 
+import org.springframework.jdbc.core.JdbcOperations_1;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,7 +33,7 @@ import org.springframework.lang.Nullable;
 public abstract class BatchUpdateUtils {
 
 	public static int[] executeBatchUpdate(
-			String sql, final List<Object[]> batchValues, final int[] columnTypes, JdbcOperations jdbcOperations) {
+			String sql, final List<Object[]> batchValues, final int[] columnTypes, JdbcOperations_1 jdbcOperations) {
 
 		return jdbcOperations.batchUpdate(
 				sql,

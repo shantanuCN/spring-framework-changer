@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.config;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory_1;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -123,7 +124,7 @@ public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 	/**
 	 * Process the given key as 'beanName.property' entry.
 	 */
-	protected void processKey(ConfigurableListableBeanFactory factory, String key, String value)
+	protected void processKey(ConfigurableListableBeanFactory_1 factory, String key, String value)
 			throws BeansException {
 
 		int separatorIndex = key.indexOf(this.beanNameSeparator);
@@ -134,7 +135,7 @@ public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 		String beanName = key.substring(0, separatorIndex);
 		String beanProperty = key.substring(separatorIndex + 1);
 		this.beanNames.add(beanName);
-		applyPropertyValue(factory, beanName, beanProperty, value);
+		applyPropertyValue((ConfigurableListableBeanFactory) factory, beanName, beanProperty, value);
 		if (logger.isDebugEnabled()) {
 			logger.debug("Property '" + key + "' set to value [" + value + "]");
 		}
@@ -144,7 +145,7 @@ public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 	 * Apply the given property value to the corresponding bean.
 	 */
 	protected void applyPropertyValue(
-			ConfigurableListableBeanFactory factory, String beanName, String property, String value) {
+			ConfigurableListableBeanFactory_1 factory, String beanName, String property, String value) {
 
 		BeanDefinition bd = factory.getBeanDefinition(beanName);
 		BeanDefinition bdToUse = bd;

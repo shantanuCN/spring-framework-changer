@@ -16,6 +16,7 @@
 
 package org.springframework.jms.config;
 
+import org.springframework.jms.listener.MessageListenerContainer_2;
 import javax.jms.MessageListener;
 
 import org.springframework.jms.listener.AbstractMessageListenerContainer;
@@ -157,8 +158,8 @@ public abstract class AbstractJmsListenerEndpoint implements JmsListenerEndpoint
 	 */
 	protected abstract MessageListener createMessageListener(MessageListenerContainer container);
 
-	private void setupMessageListener(MessageListenerContainer container) {
-		container.setupMessageListener(createMessageListener(container));
+	private void setupMessageListener(MessageListenerContainer_2 container) {
+		container.setupMessageListener(createMessageListener((MessageListenerContainer) container));
 	}
 
 	/**

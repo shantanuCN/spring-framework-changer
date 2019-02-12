@@ -16,6 +16,7 @@
 
 package org.springframework.http.converter.json;
 
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory_1;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
 import com.fasterxml.jackson.databind.DeserializationConfig;
@@ -63,9 +64,9 @@ public class SpringHandlerInstantiator extends HandlerInstantiator {
 	 * Create a new SpringHandlerInstantiator for the given BeanFactory.
 	 * @param beanFactory the target BeanFactory
 	 */
-	public SpringHandlerInstantiator(AutowireCapableBeanFactory beanFactory) {
-		Assert.notNull(beanFactory, "BeanFactory must not be null");
-		this.beanFactory = beanFactory;
+	public SpringHandlerInstantiator(AutowireCapableBeanFactory_1 beanFactory) {
+		Assert.notNull((AutowireCapableBeanFactory) beanFactory, "BeanFactory must not be null");
+		this.beanFactory = (AutowireCapableBeanFactory) beanFactory;
 	}
 
 
