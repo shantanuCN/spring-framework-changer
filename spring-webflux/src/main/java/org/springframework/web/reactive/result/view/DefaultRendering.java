@@ -16,6 +16,7 @@
 
 package org.springframework.web.reactive.result.view;
 
+import org.springframework.ui.Model_1;
 import java.util.Collections;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ class DefaultRendering implements Rendering {
 	private final HttpHeaders headers;
 
 
-	DefaultRendering(Object view, @Nullable Model model, @Nullable HttpStatus status, @Nullable HttpHeaders headers) {
+	DefaultRendering(Object view, @Nullable Model_1 model, @Nullable HttpStatus status, @Nullable HttpHeaders headers) {
 		this.view = view;
 		this.model = (model != null ? model.asMap() : Collections.emptyMap());
 		this.status = status;

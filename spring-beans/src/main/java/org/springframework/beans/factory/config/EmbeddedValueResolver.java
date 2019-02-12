@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.config;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory_2;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringValueResolver;
 
@@ -42,8 +43,8 @@ public class EmbeddedValueResolver implements StringValueResolver {
 	private final BeanExpressionResolver exprResolver;
 
 
-	public EmbeddedValueResolver(ConfigurableBeanFactory beanFactory) {
-		this.exprContext = new BeanExpressionContext(beanFactory, null);
+	public EmbeddedValueResolver(ConfigurableBeanFactory_2 beanFactory) {
+		this.exprContext = new BeanExpressionContext((ConfigurableBeanFactory) beanFactory, null);
 		this.exprResolver = beanFactory.getBeanExpressionResolver();
 	}
 

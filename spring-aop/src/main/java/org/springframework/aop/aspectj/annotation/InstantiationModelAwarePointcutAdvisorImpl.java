@@ -16,6 +16,7 @@
 
 package org.springframework.aop.aspectj.annotation;
 
+import org.springframework.aop.aspectj.annotation.AspectJAdvisorFactory_2;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -81,7 +82,7 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 
 
 	public InstantiationModelAwarePointcutAdvisorImpl(AspectJExpressionPointcut declaredPointcut,
-			Method aspectJAdviceMethod, AspectJAdvisorFactory aspectJAdvisorFactory,
+			Method aspectJAdviceMethod, AspectJAdvisorFactory_2 aspectJAdvisorFactory,
 			MetadataAwareAspectInstanceFactory aspectInstanceFactory, int declarationOrder, String aspectName) {
 
 		this.declaredPointcut = declaredPointcut;
@@ -89,7 +90,7 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 		this.methodName = aspectJAdviceMethod.getName();
 		this.parameterTypes = aspectJAdviceMethod.getParameterTypes();
 		this.aspectJAdviceMethod = aspectJAdviceMethod;
-		this.aspectJAdvisorFactory = aspectJAdvisorFactory;
+		this.aspectJAdvisorFactory = (AspectJAdvisorFactory) aspectJAdvisorFactory;
 		this.aspectInstanceFactory = aspectInstanceFactory;
 		this.declarationOrder = declarationOrder;
 		this.aspectName = aspectName;

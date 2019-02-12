@@ -16,6 +16,7 @@
 
 package org.springframework.core.io.support;
 
+import org.springframework.util.PropertiesPersister_1;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -80,7 +81,7 @@ public abstract class PropertiesLoaderUtils {
 	 * @param persister the PropertiesPersister to use
 	 * @throws IOException in case of I/O errors
 	 */
-	static void fillProperties(Properties props, EncodedResource resource, PropertiesPersister persister)
+	static void fillProperties(Properties props, EncodedResource resource, PropertiesPersister_1 persister)
 			throws IOException {
 
 		InputStream stream = null;

@@ -16,6 +16,7 @@
 
 package org.springframework.aop.framework;
 
+import org.springframework.aop.IntroductionAdvisor_2;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Method;
@@ -345,7 +346,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 		}
 	}
 
-	private void validateIntroductionAdvisor(IntroductionAdvisor advisor) {
+	private void validateIntroductionAdvisor(IntroductionAdvisor_2 advisor) {
 		advisor.validateInterfaces();
 		// If the advisor passed validation, we can make the change.
 		Class<?>[] ifcs = advisor.getInterfaces();

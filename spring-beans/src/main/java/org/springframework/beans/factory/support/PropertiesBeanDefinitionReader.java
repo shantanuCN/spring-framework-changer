@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.support;
 
+import org.springframework.util.PropertiesPersister_1;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -186,9 +187,9 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 	 * The default is DefaultPropertiesPersister.
 	 * @see org.springframework.util.DefaultPropertiesPersister
 	 */
-	public void setPropertiesPersister(@Nullable PropertiesPersister propertiesPersister) {
-		this.propertiesPersister =
-				(propertiesPersister != null ? propertiesPersister : new DefaultPropertiesPersister());
+	public void setPropertiesPersister(@Nullable PropertiesPersister_1 propertiesPersister) {
+		this.propertiesPersister = (propertiesPersister != null ? (PropertiesPersister) propertiesPersister
+                : new DefaultPropertiesPersister());
 	}
 
 	/**

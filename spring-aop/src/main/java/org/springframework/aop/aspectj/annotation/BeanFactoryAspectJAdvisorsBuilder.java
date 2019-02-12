@@ -16,6 +16,7 @@
 
 package org.springframework.aop.aspectj.annotation;
 
+import org.springframework.aop.aspectj.annotation.AspectJAdvisorFactory_1;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,11 +66,11 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 	 * @param beanFactory the ListableBeanFactory to scan
 	 * @param advisorFactory the AspectJAdvisorFactory to build each Advisor with
 	 */
-	public BeanFactoryAspectJAdvisorsBuilder(ListableBeanFactory beanFactory, AspectJAdvisorFactory advisorFactory) {
+	public BeanFactoryAspectJAdvisorsBuilder(ListableBeanFactory beanFactory, AspectJAdvisorFactory_1 advisorFactory) {
 		Assert.notNull(beanFactory, "ListableBeanFactory must not be null");
-		Assert.notNull(advisorFactory, "AspectJAdvisorFactory must not be null");
+		Assert.notNull((AspectJAdvisorFactory) advisorFactory, "AspectJAdvisorFactory must not be null");
 		this.beanFactory = beanFactory;
-		this.advisorFactory = advisorFactory;
+		this.advisorFactory = (AspectJAdvisorFactory) advisorFactory;
 	}
 
 

@@ -17,6 +17,8 @@
 package org.springframework.core.env;
 
 import java.util.function.Predicate;
+import org.springframework.core.env.Profiles_1;
+import org.springframework.core.env.Profiles_2;
 
 /**
  * Profile predicate that may be {@linkplain Environment#acceptsProfiles(Profiles)
@@ -29,16 +31,7 @@ import java.util.function.Predicate;
  * @since 5.1
  */
 @FunctionalInterface
-public interface Profiles {
-
-	/**
-	 * Test if this {@code Profiles} instance <em>matches</em> against the given
-	 * active profiles predicate.
-	 * @param activeProfiles predicate that tests whether a given profile is
-	 * currently active
-	 */
-	boolean matches(Predicate<String> activeProfiles);
-
+public interface Profiles extends Profiles_2, Profiles_1 {
 
 	/**
 	 * Create a new {@link Profiles} instance that checks for matches against

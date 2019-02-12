@@ -16,6 +16,7 @@
 
 package org.springframework.web.socket.sockjs.frame;
 
+import org.springframework.web.socket.sockjs.frame.SockJsMessageCodec_1;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -157,7 +158,7 @@ public class SockJsFrame {
 		return HEARTBEAT_FRAME;
 	}
 
-	public static SockJsFrame messageFrame(SockJsMessageCodec codec, String... messages) {
+	public static SockJsFrame messageFrame(SockJsMessageCodec_1 codec, String... messages) {
 		String encoded = codec.encode(messages);
 		return new SockJsFrame(encoded);
 	}

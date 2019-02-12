@@ -16,6 +16,7 @@
 
 package org.springframework.web.server.adapter;
 
+import org.springframework.context.ConfigurableApplicationContext_2;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -145,8 +146,8 @@ public abstract class AbstractReactiveWebInitializer implements WebApplicationIn
 
 		private final ConfigurableApplicationContext applicationContext;
 
-		public ServletContextDestroyedListener(ConfigurableApplicationContext applicationContext) {
-			this.applicationContext = applicationContext;
+		public ServletContextDestroyedListener(ConfigurableApplicationContext_2 applicationContext) {
+			this.applicationContext = (ConfigurableApplicationContext) applicationContext;
 		}
 
 		@Override

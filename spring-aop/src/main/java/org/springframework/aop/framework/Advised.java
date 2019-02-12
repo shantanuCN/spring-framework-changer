@@ -17,9 +17,12 @@
 package org.springframework.aop.framework;
 
 import org.aopalliance.aop.Advice;
+import org.springframework.aop.framework.Advised_1;
 
 import org.springframework.aop.Advisor;
+import org.springframework.aop.framework.Advised_2;
 import org.springframework.aop.TargetClassAware;
+import org.springframework.aop.framework.Advised_3;
 import org.springframework.aop.TargetSource;
 
 /**
@@ -35,13 +38,7 @@ import org.springframework.aop.TargetSource;
  * @since 13.03.2003
  * @see org.springframework.aop.framework.AdvisedSupport
  */
-public interface Advised extends TargetClassAware {
-
-	/**
-	 * Return whether the Advised configuration is frozen,
-	 * in which case no advice changes can be made.
-	 */
-	boolean isFrozen();
+public interface Advised extends TargetClassAware, Advised_3, Advised_2, Advised_1 {
 
 	/**
 	 * Are we proxying the full target class instead of specified interfaces?
@@ -66,11 +63,6 @@ public interface Advised extends TargetClassAware {
 	 * @param targetSource new TargetSource to use
 	 */
 	void setTargetSource(TargetSource targetSource);
-
-	/**
-	 * Return the {@code TargetSource} used by this {@code Advised} object.
-	 */
-	TargetSource getTargetSource();
 
 	/**
 	 * Set whether the proxy should be exposed by the AOP framework as a
@@ -101,36 +93,6 @@ public interface Advised extends TargetClassAware {
 	 * @see org.springframework.aop.ClassFilter
 	 */
 	void setPreFiltered(boolean preFiltered);
-
-	/**
-	 * Return whether this proxy configuration is pre-filtered so that it only
-	 * contains applicable advisors (matching this proxy's target class).
-	 */
-	boolean isPreFiltered();
-
-	/**
-	 * Return the advisors applying to this proxy.
-	 * @return a list of Advisors applying to this proxy (never {@code null})
-	 */
-	Advisor[] getAdvisors();
-
-	/**
-	 * Add an advisor at the end of the advisor chain.
-	 * <p>The Advisor may be an {@link org.springframework.aop.IntroductionAdvisor},
-	 * in which new interfaces will be available when a proxy is next obtained
-	 * from the relevant factory.
-	 * @param advisor the advisor to add to the end of the chain
-	 * @throws AopConfigException in case of invalid advice
-	 */
-	void addAdvisor(Advisor advisor) throws AopConfigException;
-
-	/**
-	 * Add an Advisor at the specified position in the chain.
-	 * @param advisor the advisor to add at the specified position in the chain
-	 * @param pos position in chain (0 is head). Must be valid.
-	 * @throws AopConfigException in case of invalid advice
-	 */
-	void addAdvisor(int pos, Advisor advisor) throws AopConfigException;
 
 	/**
 	 * Remove the given advisor.

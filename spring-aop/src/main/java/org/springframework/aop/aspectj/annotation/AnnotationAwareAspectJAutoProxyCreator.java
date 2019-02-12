@@ -16,6 +16,7 @@
 
 package org.springframework.aop.aspectj.annotation;
 
+import org.springframework.aop.aspectj.annotation.AspectJAdvisorFactory_1;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -70,9 +71,9 @@ public class AnnotationAwareAspectJAutoProxyCreator extends AspectJAwareAdvisorA
 		}
 	}
 
-	public void setAspectJAdvisorFactory(AspectJAdvisorFactory aspectJAdvisorFactory) {
-		Assert.notNull(aspectJAdvisorFactory, "AspectJAdvisorFactory must not be null");
-		this.aspectJAdvisorFactory = aspectJAdvisorFactory;
+	public void setAspectJAdvisorFactory(AspectJAdvisorFactory_1 aspectJAdvisorFactory) {
+		Assert.notNull((AspectJAdvisorFactory) aspectJAdvisorFactory, "AspectJAdvisorFactory must not be null");
+		this.aspectJAdvisorFactory = (AspectJAdvisorFactory) aspectJAdvisorFactory;
 	}
 
 	@Override

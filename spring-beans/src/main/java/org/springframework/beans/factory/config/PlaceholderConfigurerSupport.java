@@ -16,6 +16,7 @@
 
 package org.springframework.beans.factory.config;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory_1;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -210,7 +211,7 @@ public abstract class PlaceholderConfigurerSupport extends PropertyResourceConfi
 	}
 
 
-	protected void doProcessProperties(ConfigurableListableBeanFactory beanFactoryToProcess,
+	protected void doProcessProperties(ConfigurableListableBeanFactory_1 beanFactoryToProcess,
 			StringValueResolver valueResolver) {
 
 		BeanDefinitionVisitor visitor = new BeanDefinitionVisitor(valueResolver);

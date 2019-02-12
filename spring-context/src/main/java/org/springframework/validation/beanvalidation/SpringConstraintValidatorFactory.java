@@ -16,6 +16,7 @@
 
 package org.springframework.validation.beanvalidation;
 
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory_1;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorFactory;
 
@@ -45,9 +46,9 @@ public class SpringConstraintValidatorFactory implements ConstraintValidatorFact
 	 * Create a new SpringConstraintValidatorFactory for the given BeanFactory.
 	 * @param beanFactory the target BeanFactory
 	 */
-	public SpringConstraintValidatorFactory(AutowireCapableBeanFactory beanFactory) {
-		Assert.notNull(beanFactory, "BeanFactory must not be null");
-		this.beanFactory = beanFactory;
+	public SpringConstraintValidatorFactory(AutowireCapableBeanFactory_1 beanFactory) {
+		Assert.notNull((AutowireCapableBeanFactory) beanFactory, "BeanFactory must not be null");
+		this.beanFactory = (AutowireCapableBeanFactory) beanFactory;
 	}
 
 

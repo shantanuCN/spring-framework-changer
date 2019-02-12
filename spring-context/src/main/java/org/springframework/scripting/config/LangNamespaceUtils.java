@@ -16,6 +16,7 @@
 
 package org.springframework.scripting.config;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry_1;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -45,7 +46,7 @@ public abstract class LangNamespaceUtils {
 	 * @param registry the {@link BeanDefinitionRegistry} to register the script processor with
 	 * @return the {@link ScriptFactoryPostProcessor} bean definition (new or already registered)
 	 */
-	public static BeanDefinition registerScriptFactoryPostProcessorIfNecessary(BeanDefinitionRegistry registry) {
+	public static BeanDefinition registerScriptFactoryPostProcessorIfNecessary(BeanDefinitionRegistry_1 registry) {
 		BeanDefinition beanDefinition;
 		if (registry.containsBeanDefinition(SCRIPT_FACTORY_POST_PROCESSOR_BEAN_NAME)) {
 			beanDefinition = registry.getBeanDefinition(SCRIPT_FACTORY_POST_PROCESSOR_BEAN_NAME);

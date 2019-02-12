@@ -17,7 +17,9 @@
 package org.springframework.web.reactive.socket;
 
 import java.util.Collections;
+import org.springframework.web.reactive.socket.WebSocketHandler_1;
 import java.util.List;
+import org.springframework.web.reactive.socket.WebSocketHandler_2;
 
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
@@ -94,29 +96,6 @@ import reactor.core.publisher.Mono;
  * @author Rossen Stoyanchev
  * @since 5.0
  */
-public interface WebSocketHandler {
-
-	/**
-	 * Return the list of sub-protocols supported by this handler.
-	 * <p>By default an empty list is returned.
-	 */
-	default List<String> getSubProtocols() {
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Invoked when a new WebSocket connection is established, and allows
-	 * handling of the session.
-	 *
-	 * <p>See the class-level doc and the reference for more details and
-	 * examples of how to handle the session.
-	 *
-	 * @param session the session to handle
-	 * @return indicates when appilcation handling of the session is complete,
-	 * which should reflect the completion of the inbound message stream
-	 * (i.e. connection closing) and possibly the completion of the outbound
-	 * message stream and the writing of messages.
-	 */
-	Mono<Void> handle(WebSocketSession session);
+public interface WebSocketHandler extends WebSocketHandler_2, WebSocketHandler_1 {
 
 }
